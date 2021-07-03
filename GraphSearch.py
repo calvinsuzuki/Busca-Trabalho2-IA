@@ -3,7 +3,7 @@ import random
 import numpy as np
 import networkx as nx
 
-DBG = True
+DBG = False
 
 def BLSearch(G, origin, objective):
 
