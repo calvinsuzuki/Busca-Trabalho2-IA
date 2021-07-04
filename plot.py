@@ -22,8 +22,8 @@ def plotXY(graph, points):
                     (x,y), # these are the coordinates to position the label
                     textcoords="offset points", # how to position the text
                     xytext=(0,5), # distance from text to points (x,y)
-                    ha='center') # horizontal alignment can be left, right or center
- 
+                    ha="center",
+                    va="center") # horizontal alignment can be left, right or center
     
     for edge in edges:
         x_vec = [points[edge[0]][0], points[edge[1]][0]]
