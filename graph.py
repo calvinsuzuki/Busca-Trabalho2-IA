@@ -76,8 +76,8 @@ def __makeEdges(close_nodes_mtx, n_edges):
             # if n_edges_per_node[node] >= n_edges:
             #     continue 
             
-            if (node, curr_node) in edges:
-                continue
+            # if (node, curr_node) in edges:
+            #     continue
             
             edges.append((curr_node, node))
             n_edges_per_node[curr_node]+=1

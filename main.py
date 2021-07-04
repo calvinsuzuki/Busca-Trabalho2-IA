@@ -1,14 +1,25 @@
 import graph
 import plot
+import GraphSearch as gs
 
-G, points = graph.makeGraph(3000, 3)
+G, points = graph.makeGraph(50, 3)
 
-for i in range(len(G.nodes)):
-    print(G[i])
+string = gs.BLSearch(G, 0, 10)
 
-# print(G[9])
+if string == '-1' :
+	print("Not found!")
+else :
+	print("Found! The way is " + string)
 
-plot.plotXY(G, points, label = False)
+string = gs.BPSearch(G, 0, 10)
+
+if string == '-1' :
+	print("Not found!")
+else :
+	print("Found! The way is " + string)
+
+plot.plotXY(G, points, label = True)
 # plot.plotGraph(G)
+
 
 
