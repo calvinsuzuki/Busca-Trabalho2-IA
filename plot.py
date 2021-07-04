@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import networkx as nx
+import numpy as np
 
 def plotGraph(graph):
     
@@ -31,3 +32,20 @@ def plotXY(graph, points, label = True):
         plt.plot(x_vec, y_vec)
     
     plt.show()
+    
+def plotNodesResults(tests, time_mtx, len_mtx):
+    
+    nrows = len(tests)
+    ncols = len(tests[0])
+    nmethods = len(time_mtx[0])
+    
+    figT, axs = plt.subplots(nrows, ncols)
+    
+    for i in range(nrows):
+        for j in range(ncols):
+            x = np.arange(nmethods)
+            axs[i][j].bar(x, time_mtx[i], 0.3)
+    plt.show()
+    
+def plotEdgesResults():
+    pass
