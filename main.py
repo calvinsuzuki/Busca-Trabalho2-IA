@@ -55,5 +55,5 @@ for i in range(len(tests)):
     graph_time.append(t_graph)
     time_mtx.append([t_breadth, t_depth])
     len_mtx.append([len_breadth, len_depth])
-    
+
 plot.plotNodesResults(tests_mtx, time_mtx, len_mtx)
