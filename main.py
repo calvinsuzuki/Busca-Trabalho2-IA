@@ -4,19 +4,19 @@ import GraphSearch as gs
 
 G, points = graph.makeGraph(500, 3)
 
-string = gs.BLSearch(G, 0, 10)
+string = gs.Breadth(G, 0, 10)
 
 if string == '-1' :
 	print("Not found!")
 else :
-	print("Found! The way is " + string)
+	print("Found! The Breadth way is " + string + "\n")
 
-string = gs.BPSearch(G, 0, 10)
+string = gs.Depth(G, 0, 10)
 
 if string == '-1' :
 	print("Not found!")
 else :
-	print("Found! The way is " + string)
+	print("Found! The Depth way is " + string)
 
 plot.plotXY(G, points)
 # plot.plotGraph(G)
