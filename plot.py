@@ -54,8 +54,6 @@ def plotNodesResults(tests, time_mtx, len_mtx, labels):
             
             ntest += 1 
     
-    
-    
     plt.show()
     
 def plotEdgesResults():
