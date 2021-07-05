@@ -33,7 +33,7 @@ def plotXY(graph, points, label = True):
     
     plt.show()
     
-def plotNodesResults(tests, time_mtx, len_mtx):
+def plotNodesResults(tests, time_mtx, len_mtx, labels):
     
     nrows = len(tests)
     ncols = len(tests[0])
@@ -41,10 +41,21 @@ def plotNodesResults(tests, time_mtx, len_mtx):
     
     figT, axs = plt.subplots(nrows, ncols)
     
+    x = np.arange(nmethods)
+    
+    ntest = 0
     for i in range(nrows):
         for j in range(ncols):
-            x = np.arange(nmethods)
-            axs[i][j].bar(x, time_mtx[i], 0.3)
+            
+            axs[i][j].bar(x, time_mtx[ntest], 0.3)
+            axs[i][j].set_xticks(x)
+            axs[i][j].set_ylabel('time taken')
+            axs[i][j].set_xticklabels(labels)
+            
+            ntest += 1 
+    
+    
+    
     plt.show()
     
 def plotEdgesResults():
