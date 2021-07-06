@@ -120,7 +120,7 @@ def __BlindSearch(graph, origin, target, mode, DBG = False):
 	return [-1]
 
 # Função de busca heurística
-def __HeuristicSearch(graph, points, origin, target, G, H, DBG = True):
+def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 
 	# Finaliza ao encontrar o caso especificado
 	if origin==target:
@@ -138,10 +138,13 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = True):
 
 	while(True) :
 
-		HTOTAL = nodesData[0][0]
-		HWAY = nodesData[0][1]
-		NODE = nodesData[0][2]
-		WAY = nodesData[0][3]
+		# Analisa o 'node' com a menor heuristica
+		nodeMin = getMinNode(nodesData)
+
+		HTOTAL = nodeMin[0]
+		HWAY = nodeMin[1]
+		NODE = nodeMin[2]
+		WAY = nodeMin[3]
 		
 		if DBG :
 			print("L = ")
@@ -159,7 +162,7 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = True):
 		neighbors = list(graph.neighbors(NODE))
 
 		# Remove 'node' da lista de procura
-		nodesData.pop(0)
+		nodesData.remove(nodeMin)
 
 		# Se 'node' nao possui vizinhos
 		if len(neighbors) == 0 :
@@ -171,8 +174,6 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = True):
 			if len(nodesData) == 0 :
 				return [-1]
 			
-			# Retira-se o item da lista 
-			nodesData.pop(0)
 
 		# Se 'node' possui vizinhos
 		else :
@@ -224,7 +225,6 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = True):
 
 			# Ordena a lista de 'nodes' com suas heuristicas
 			# A nodesData[0] é o novo node para recomeçar a busca
-			#nodesData = sorted(nodesData , key=lambda k: [k[0]])
 
 	return [-1]
 
@@ -233,4 +233,8 @@ def __dist(pt0, pt1):
     
     return np.sqrt((pt0[0]-pt1[0])**2+(pt0[1]-pt1[1])**2)
 
+def getMinNode(nodesData):
+	position = np.where(np.array(nodesData, dtype="object")[:,0]==np.amin(np.array(nodesData, dtype="object")[:,0]))[0][0]
+
+	return nodesData[position]
 
