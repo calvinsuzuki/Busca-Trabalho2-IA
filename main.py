@@ -133,3 +133,4 @@ print(f'Len std: {np.array(len_mtx_std)}')
 
 plot.plotTimeResults(tests_mtx, time_mtx_mean, time_mtx_std, labels)
 plot.plotLenResults(tests_mtx, len_mtx_mean, len_mtx_std, labels)
+plot.Show()

@@ -31,7 +31,6 @@ def plotXY(graph, points, label = True):
         y_vec = [points[edge[0]][1], points[edge[1]][1]]
         plt.plot(x_vec, y_vec)
     
-    plt.show()
     
 def plotTimeResults(tests_mtx, time_mtx_mean, time_mtx_std, labels):
     
@@ -64,7 +63,7 @@ def plotTimeResults(tests_mtx, time_mtx_mean, time_mtx_std, labels):
             
             if ncols != 1:
                 axs[i][j].bar(x, np.array(time_mtx_mean[ntest])*1000, 0.2, yerr = np.array(time_mtx_std[ntest])*1000, align='center',
-                            alpha=0.7, ecolor='black', capsize=10, color = 'blue',  fmt='o')
+                            alpha=0.7, ecolor='black', capsize=10, color = 'blue')
                 axs[i][j].set_xticks(x)
                 if j==0:
                     axs[i][j].set_ylabel('Tempo médio (ms)', fontsize=7)
@@ -74,7 +73,7 @@ def plotTimeResults(tests_mtx, time_mtx_mean, time_mtx_std, labels):
             
             else:
                 axs[ntest].bar(x, np.array(time_mtx_mean[ntest])*1000, 0.2, yerr = np.array(time_mtx_std[ntest])*1000, align='center',
-                            alpha=0.7, ecolor='black', capsize=10, color = 'blue',  fmt='o')
+                            alpha=0.7, ecolor='black', capsize=10, color = 'blue')
                 axs[ntest].set_xticks(x)                
                 axs[ntest].set_ylabel('Tempo médio (ms)', fontsize=7)
                 axs[ntest].set_xticklabels(labels)
@@ -84,7 +83,6 @@ def plotTimeResults(tests_mtx, time_mtx_mean, time_mtx_std, labels):
     # set the spacing between subplots
     # figT.tight_layout()
     
-    plt.show()
     
 def plotLenResults(tests_mtx, len_mtx_mean, len_mtx_std, labels):
     
@@ -118,7 +116,7 @@ def plotLenResults(tests_mtx, len_mtx_mean, len_mtx_std, labels):
             
             if ncols != 1:
                 axs[i][j].bar(x, np.array(len_mtx_mean[ntest]), 0.2, yerr = np.array(len_mtx_std[ntest]), align='center',
-                            alpha=0.7, ecolor='black', capsize=10, color = 'red',  fmt='o')
+                            alpha=0.7, ecolor='black', capsize=10, color = 'red')
                 axs[i][j].set_xticks(x)
                 if j==0:
                     axs[i][j].set_ylabel('Tamanho médio (vértices)', fontsize = 7)
@@ -128,7 +126,7 @@ def plotLenResults(tests_mtx, len_mtx_mean, len_mtx_std, labels):
             
             else:
                 axs[ntest].bar(x, np.array(len_mtx_mean[ntest]), 0.2, yerr = np.array(len_mtx_std[ntest]), align='center',
-                            alpha=0.7, ecolor='black', capsize=5, color = 'red',  fmt='o')
+                            alpha=0.7, ecolor='black', capsize=5, color = 'red')
                 axs[ntest].set_xticks(x)                
                 axs[ntest].set_ylabel('Tamanho médio (vértices)', fontsize = 7)
                 axs[ntest].set_xticklabels(labels)
@@ -136,5 +134,6 @@ def plotLenResults(tests_mtx, len_mtx_mean, len_mtx_std, labels):
                 axs[ntest].set_ylim([0, ylim])
             ntest += 1 
     
+def Show():
     plt.show()
     
