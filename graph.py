@@ -131,10 +131,12 @@ if __name__=='__main__':
     # plot.Show()
     
     
-    # savePointsAndEdges("500-3.npy", 500, 3)
+    # savePointsAndEdges("5000-3.npy", 5000, 3)
     
+    path = [1,2,3,5,4,6,9,10]
     
-    G, points = loadNodesAndMakeGraph('1000-3.npy')
+    G, points = loadNodesAndMakeGraph('5000-3.npy')
     
-    plot.plotXY(G, points)
+    figG, ax = plot.plotXY(G, points)
+    plot.plotPath(ax, path, points, color = 'red', time = 5)
     plot.Show()
