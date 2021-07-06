@@ -5,6 +5,8 @@ import plot
 import GraphSearch as gs
 import time
 
+plot.plotGraph(G)
+
 # Test case = [(n_nodes, n_edges), ...]
 tests_mtx = [[(100, 3), (200, 3), (300,3)],
              [(100, 5), (200, 5), (300,5)],
