@@ -19,13 +19,18 @@ def makeGraph(n_nodes, n_edges):
 
 def __makeNodes(n_nodes):
     
-    # number of vertices is the max permited value too
-    x = np.array([np.random.randint(n_nodes) for i in range(n_nodes)])
-    y = np.array([np.random.randint(n_nodes) for i in range(n_nodes)])
+    # # number of vertices is the max permited value too
+    # x = np.array([np.random.randint(n_nodes) for i in range(n_nodes)])
+    # y = np.array([np.random.randint(n_nodes) for i in range(n_nodes)])
     
-    nodes = np.array([x, y]).T
-
-    return nodes
+    points = []
+    for i in range(n_nodes):
+        points_aux = [np.random.randint(n_nodes), np.random.randint(n_nodes)]
+        if points_aux in points:
+            continue
+        points.append(points_aux)
+    
+    return points
 
 def __getCloseNodes(nodes):
     

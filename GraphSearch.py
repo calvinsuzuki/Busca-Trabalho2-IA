@@ -14,7 +14,7 @@ def __BlindSearch(G, origin, objective, mode):
 	src_way = [str(origin)]
 
 	if origin==objective:
-		print("Visiting " + str(search) + "...")
+		# print("Visiting " + str(search) + "...")
 		return str(origin)
 
 	while(True) :
