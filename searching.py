@@ -6,68 +6,81 @@ import GraphSearch as gs
 import time
 import numpy as np
 
-n_nodes = 1000
+n_nodes = 20
 # Make Graph
 t = time.time()
 # USE IT IF WANT A PREDEFINED GRAPH
-# G, points = loadNodesAndMakeGraph('1000-3.npy')
-G, points = graph.makeGraph(n_nodes, 3)
+G, points = graph.loadNodesAndMakeGraph('1000-3.npy')
+#G, points = graph.makeGraph(n_nodes, 3)
 print("makeGraph time taken: " + "{:.6f}".format(time.time()-t))
 
-origin = np.random.randint(n_nodes)
-target = np.random.randint(n_nodes)
+origin = 633
+target = 109
 
-print("\nSearching node " + str(target) + " from node " + str(origin))
+# origin = np.random.randint(n_nodes)
+# target = np.random.randint(n_nodes)
+
+print("\nOrigin: " + str(origin) + " Target: " + str(target))
+
 
 # Breadth
 t = time.time()
 way = gs.Breadth(G, origin, target)
-print("\nBreadth time taken: " + "{:.6f}".format(time.time()-t))
+print("\n*****\tBreadth\t*****" ) 
+print("Time taken: " + "{:.6f}".format(time.time()-t))
 
 if way == [-1] :
-	print("Breadth: Not found!")
+	print("Not found!")
 else :
-	print("Found! The Breadth way is " + str(way))
+	print("The Breadth way is " + str(way))
+
 
 # Depth
 t = time.time()
 way = gs.Depth(G, origin, target)
-print("\nDepth time taken: " + "{:.6f}".format(time.time()-t))
+print("\n*****\tDepth\t*****" )  
+print("Time taken: " + "{:.6f}".format(time.time()-t))
 
 if way == [-1] :
-	print("Depth: Not found!")
+	print("Not found!")
 else :
-	print("Found! The Depth way is " + str(way))
+	print("The way is " + str(way))
+
 
 # Best First
 t = time.time()
 way = gs.BestFirst(G, points, origin, target)
-print("\nBestFirst time taken: " + "{:.6f}".format(time.time()-t))
+print("\n*****\tBFSearch\t*****" )  
+print("Time taken: " + "{:.6f}".format(time.time()-t))
 
 if way == [-1] :
-	print("BestFirst: Not found!")
+	print("Not found!")
 else :
-	print("Found! The BestFirst way is " + str(way))
+	print("The way is " + str(way))
+
 
 # A Search
 t = time.time()
 way = gs.ASearch(G, points, origin, target)
-print("\nASearch time taken: " + "{:.6f}".format(time.time()-t))
+print("\n*****\tASearch\t*****" )  
+print("Time taken: " + "{:.6f}".format(time.time()-t))
 
 if way == [-1] :
-	print("ASearch: Not found!")
+	print("Not found!")
 else :
-	print("Found! The ASearch way is " + str(way))
+	print("The way is " + str(way))
+
 
 # A* Search
 t = time.time()
 way = gs.Asterix(G, points, origin, target)
-print("\nAsterix time taken: " + "{:.6f}".format(time.time()-t))
+print("\n*****\tAsterix\t*****" )  
+print("Time taken: " + "{:.6f}".format(time.time()-t))
 
 if way == [-1] :
-	print("Asterix: Not found!")
+	print("Not found!")
 else :
-	print("Found! The Asterix way is " + str(way))
+	print("The way is " + str(way))
 
 
 plot.plotXY(G, points)

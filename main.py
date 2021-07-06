@@ -6,6 +6,10 @@ import GraphSearch as gs
 import numpy as np
 import time
 
+# def getLoadedGraph(n_nodes, n_edges):
+#     if n_nodes == 500 and n_edges ==3:
+#         return
+
 # Test case = [(n_nodes, n_edges), ...]
 # tests_mtx = [[(200, 3), (200, 5), (200,7)],
 #              [(400, 3), (400, 5), (400,7)],
@@ -16,12 +20,12 @@ import time
 #              [(1000, 3)],
 #              [(2000,3)]]
 tests_mtx = [[(500, 3)],
-             [(500, 5)],
-             [(500,7)]]
+             [(5000, 3)],
+             [(10000,3)]]
 
 tests = [item for sublist in tests_mtx for item in sublist ]
 
-iter_times = 10
+iter_times = 1
 
 graph_time = []
 
@@ -31,14 +35,28 @@ len_mtx_stat = []
 
 labels = ['Breadth', 'Depth', 'Best First', 'A', 'A*']
 
+G500, points500 = graph.loadNodesAndMakeGraph('500-3.py')
+G5000, points5000 = graph.loadNodesAndMakeGraph('5000-3.py')
+G10000, points10000 = graph.loadNodesAndMakeGraph('10000-3.py')
+
 for i in range(len(tests)):
 
     n_nodes = tests[i][0]
     n_edges = tests[i][1]
 
-    t = time.time()
-    G, points = graph.makeGraph(n_nodes, n_edges)
-    t_graph = time.time() - t
+    # t = time.time()
+    # G, points = graph.makeGraph(n_nodes, n_edges)
+    # t_graph = time.time() - 
+    
+    if n_nodes == 500:
+        G = G500
+        points = points500
+    elif n_nodes == 5000:
+        G = G5000
+        points = points5000
+    elif n_nodes == 10000:
+        G = G10000
+        points = points10000
 
     print("Test " + str(i) + " - Nodes: " + str(n_nodes) + " , Edges: " + str(n_edges) + ": ")
     print("Made graph. Time taken: " + str(t_graph))
@@ -125,22 +143,8 @@ for i in range(len(tests)):
     
     len_Astar_stat =  np.array([np.mean(len_Astar_aux), np.var(len_Astar_aux), np.std(len_Astar_aux)])
     
-    # print("------Breadth------")
-    # if breadth_way[0] == -1 :
-    #     print("Not found!")
-    # else :
-    #     # print("Found! The Breadth way is " + breadth_way_str)
-    #     print('Found!')
-    # print("Time taken: " + str(t_breadth_mean))
+    print("Done!")
     
-    # print("-------Depth-------")
-    # if depth_way[0] == -1:
-    #     print("Not found!")
-    # else :
-    #     # print("Found! The Depth way is " + depth_way_str)
-    #     print('Found!')
-    # print("Time taken: " + str(t_depth_mean))
-
     print("-------------------" + '\n')
     
     graph_time.append(t_graph)
@@ -149,20 +153,12 @@ for i in range(len(tests)):
     
     len_mtx_stat.append([len_breadth_stat, len_depth_stat, len_bestf_stat, len_A_stat, len_Astar_stat])
 
-# print(f'Time mean: {np.array(time_mtx_mean)}')
-# print(f'Time var: {np.array(time_mtx_var)}')
-# print(f'Time std: {np.array(time_mtx_std)}')
-
-# print(f'Len mean: {np.array(len_mtx_mean)}')
-# print(f'Len var: {np.array(len_mtx_var)}')
-# print(f'Len std: {np.array(len_mtx_std)}')
-
 t_mtx_stat = np.array(t_mtx_stat)
 len_mtx_stat = np.array(len_mtx_stat)
 
 print(np.array(t_mtx_stat))
 
-print(np.array(t_mtx_stat)[:,:,0])
+print(np.array(len_mtx_stat))
 
 plot.plotTimeResults(tests_mtx, t_mtx_stat[:,:,0], t_mtx_stat[:,:,2], labels)
 plot.plotLenResults(tests_mtx, len_mtx_stat[:,:,0], len_mtx_stat[:,:,2], labels)

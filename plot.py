@@ -57,10 +57,9 @@ def plotPath(ax, path, points, color = 'red', wait = 3):
 
 def PlotVisitedNodes(ax, visited, color):
     
-    for i in range(len(visited)):
-        
-        ax.scatter()
-    
+    # for i in range(len(visited)):
+    #     ax.scatter()
+    pass
 
 def animate():
     
