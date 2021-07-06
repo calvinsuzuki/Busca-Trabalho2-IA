@@ -10,31 +10,66 @@ def plotGraph(graph):
 
     plt.show()
 
-def plotXY(graph, points, label = True):
+def plotXY(graph, points, label_u = False):
     
     edges = list(graph.edges)
-    plt.scatter(points[:,0], points[:,1])
+    figG = plt.figure()
+    ax = plt.axes()
+    
+    for edge in edges:
+        x_vec = [points[edge[0]][0], points[edge[1]][0]]
+        y_vec = [points[edge[0]][1], points[edge[1]][1]]
+        ax.plot(x_vec, y_vec, color = 'dimgray', linewidth=1)
+        
+    ax.scatter(points[:,0], points[:,1], color = 'black', s=5)
     
     if len(points)>=100:
         label = False
+    
+    label = label_u
     
     if label:
         for i in range(len(points)):
             x, y = points[i][0], points[i][1]
             label = "{}".format(i)
 
-            plt.annotate(label, # this is the text
+            ax.annotate(label, # this is the text
                         (x,y), # these are the coordinates to position the label
                         textcoords="offset points", # how to position the text
                         xytext=(0,5), # distance from text to points (x,y)
-                        ha='center') # horizontal alignment can be left, right or center
+                        ha='center', fontsize = 7) # horizontal alignment can be left, right or center
 
-    for edge in edges:
-        x_vec = [points[edge[0]][0], points[edge[1]][0]]
-        y_vec = [points[edge[0]][1], points[edge[1]][1]]
-        plt.plot(x_vec, y_vec)
+    return figG, ax 
+
+def plotPath(ax, path, points, color = 'red', wait = 3):
+    
+    max_i =len(path)-2
+    
+    for i in range(max_i):
+        x_vec = [points[path[i]][0], points[path[i+1]][0]]
+        y_vec = [points[path[i]][1], points[path[i+1]][1]]
+        
+        ax.plot(x_vec, y_vec, color = color)
+        plt.show(block=False)
+        plt.pause(wait)
+        
+    return ax
+
+def PlotVisitedNodes(ax, visited, color):
+    
+    for i in range(len(visited)):
+        
+        ax.scatter()
+    
+
+def animate():
+    
+    plt.show(block=False)
+    plt.pause(0.5)
     
     
+
+
 def plotTimeResults(tests_mtx, time_mtx_mean, time_mtx_std, labels):
     
     nrows = len(tests_mtx)
