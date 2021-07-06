@@ -1,4 +1,5 @@
 import numpy as np
+import plot 
 import networkx as nx
 
 def makeGraph(n_nodes, n_edges):
@@ -13,7 +14,7 @@ def makeGraph(n_nodes, n_edges):
     
     G.add_nodes_from(np.arange(n_nodes))
     
-    G.add_edges_from(points)
+    G.add_edges_from(edges)
     
     return G, points
 
@@ -40,19 +41,19 @@ def __makeNodes(n_nodes):
 
 
 
-def __getCloseNodes(nodes):
+def __getCloseNodes(points):
     
     close_nodes = []
     
-    for i in range(len(nodes)):
+    for i in range(len(points)):
         node_and_dist = []
-        node = nodes[i]
-        x = node[0]
-        y = node[1]
+        curr = points[i]
+        x = curr[0]
+        y = curr[1]
         
-        for j in range(len(nodes)):
+        for j in range(len(points)):
             
-            adj = nodes[j]
+            adj = points[j]
             
             if i == j:
                 continue
@@ -100,7 +101,8 @@ def __makeEdges(close_nodes_mtx, n_edges):
     return edges
 
 if __name__=='__main__':
-    makeGraph(5,5)
-    
+    G, points = makeGraph(20,3)
+    plot.plotXY(G, points)
+    plot.Show()
     
     
