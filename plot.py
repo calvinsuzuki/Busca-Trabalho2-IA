@@ -15,6 +15,9 @@ def plotXY(graph, points, label = True):
     edges = list(graph.edges)
     plt.scatter(points[:,0], points[:,1])
     
+    if len(points)>=100:
+        label = False
+    
     if label:
         for i in range(len(points)):
             x, y = points[i][0], points[i][1]

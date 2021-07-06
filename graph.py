@@ -4,7 +4,7 @@ import networkx as nx
 
 def makeGraph(n_nodes, n_edges):
     
-    points = __makeNodes(n_nodes)
+    points = __makePoints(n_nodes)
     
     close_nodes = __getCloseNodes(points)
     
@@ -18,7 +18,34 @@ def makeGraph(n_nodes, n_edges):
     
     return G, points
 
-def __makeNodes(n_nodes):
+def savePointsAndEdges(file, n_nodes, n_edges):
+    
+    points = __makePoints(n_nodes)
+    
+    close_nodes = __getCloseNodes(points)
+    
+    edges = __makeEdges(close_nodes, n_edges)
+    
+    with open(file, 'wb') as f:
+        np.save(f, points)
+        np.save(f, edges)
+
+def loadNodesAndMakeGraph(file_name):
+    
+    with open(file_name, 'rb') as f:
+        points = np.load(f)
+        edges = np.load(f)
+    
+    G = nx.Graph()
+    
+    G.add_nodes_from(np.arange(len(points)))
+    
+    G.add_edges_from(edges)
+    
+    return G, points
+    
+
+def __makePoints(n_nodes):
     
     # # number of vertices is the max permited value too
     # x = np.array([np.random.randint(n_nodes) for i in range(n_nodes)])
@@ -38,8 +65,6 @@ def __makeNodes(n_nodes):
         points.append(points_aux)
     
     return np.array(points)
-
-
 
 def __getCloseNodes(points):
     
@@ -96,13 +121,20 @@ def __makeEdges(close_nodes_mtx, n_edges):
             
             edges.append((curr_node, node))
             n_edges_per_node[curr_node]+=1
-            n_edges_per_node[node]+=1
+            # n_edges_per_node[node]+=1
         
     return edges
 
 if __name__=='__main__':
-    G, points = makeGraph(20,3)
+    # G, points = makeGraph(20,3)
+    # plot.plotXY(G, points)
+    # plot.Show()
+    
+    
+    # savePointsAndEdges("500-3.npy", 500, 3)
+    
+    
+    G, points = loadNodesAndMakeGraph('1000-3.npy')
+    
     plot.plotXY(G, points)
     plot.Show()
-    
-    

@@ -9,6 +9,8 @@ import numpy as np
 n_nodes = 1000
 # Make Graph
 t = time.time()
+# USE IT IF WANT A PREDEFINED GRAPH
+# G, points = loadNodesAndMakeGraph('1000-3.npy')
 G, points = graph.makeGraph(n_nodes, 3)
 print("makeGraph time taken: " + "{:.6f}".format(time.time()-t))
 
