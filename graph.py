@@ -3,9 +3,9 @@ import networkx as nx
 
 def makeGraph(n_nodes, n_edges):
     
-    nodes = __makeNodes(n_nodes)
+    points = __makeNodes(n_nodes)
     
-    close_nodes = __getCloseNodes(nodes)
+    close_nodes = __getCloseNodes(points)
     
     edges = __makeEdges(close_nodes, n_edges)
     
@@ -13,9 +13,9 @@ def makeGraph(n_nodes, n_edges):
     
     G.add_nodes_from(np.arange(n_nodes))
     
-    G.add_edges_from(edges)
+    G.add_edges_from(points)
     
-    return G, nodes
+    return G, points
 
 def __makeNodes(n_nodes):
     
@@ -26,11 +26,19 @@ def __makeNodes(n_nodes):
     points = []
     for i in range(n_nodes):
         points_aux = [np.random.randint(n_nodes), np.random.randint(n_nodes)]
-        if points_aux in points:
-            continue
+        
+        while True:
+            if points_aux in points:
+                points_aux = [np.random.randint(n_nodes), np.random.randint(n_nodes)]
+                continue
+            else:
+                break
+
         points.append(points_aux)
     
     return np.array(points)
+
+
 
 def __getCloseNodes(nodes):
     

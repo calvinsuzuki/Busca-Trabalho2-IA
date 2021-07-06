@@ -32,7 +32,7 @@ def __BlindSearch(graph, origin, target, mode, DBG = False):
 	if origin==target:
 		if DBG :
 			print("Your origin is your target!")
-		return str(origin)
+		return [origin]
 
 	# Inicializa a busca partindo da origem
 	node = origin
@@ -51,7 +51,7 @@ def __BlindSearch(graph, origin, target, mode, DBG = False):
 
 		# Se o nó procurado for esse, retorne True
 		if target==node:
-			return str(src_way[0])
+			return src_way[0]
 
 		if DBG :
 			print("Not found! Lets see "+str(node)+" neighbors...")
@@ -73,7 +73,7 @@ def __BlindSearch(graph, origin, target, mode, DBG = False):
 
 			# Se a lista de procura for vazia: Nó não encontrado!
 			if len(search) == 0 :
-				return '-1'
+				return [-1]
 			
 			# Retira-se o item da lista 
 			search.pop(0)
@@ -112,12 +112,12 @@ def __BlindSearch(graph, origin, target, mode, DBG = False):
 
 			# E se a lista de procura for vazia
 			if len(search) == 0 :
-				return '-1'
+				return [-1]
 
 			# Define o novo node para recomeçar a busca
 			node = search[0]
 
-	return '-1'
+	return [-1]
 
 # Função de busca heurística
 def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
@@ -126,7 +126,7 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 	if origin==target:
 		if DBG :
 			print("Your origin is your target!")
-		return str(origin)
+		return [origin]
 
 	# Heuristica euclidiana
 	h_euclidian = __dist(points[origin], points[target])
@@ -150,7 +150,7 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 
 		# Se o nó procurado for esse, retorne o "Caminho ao Nó"
 		if target==NODE:
-			return str(WAY)
+			return WAY
 
 		if DBG :
 			print("Not found! Lets see "+str(NODE)+" neighbors...")
@@ -169,7 +169,7 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 
 			# Se a lista de nós for vazia: Nó não encontrado!
 			if len(nodesData) == 0 :
-				return '-1'
+				return [-1]
 			
 			# Retira-se o item da lista 
 			nodesData.pop(0)
@@ -220,13 +220,13 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 
 			# E se a lista de procura for vazia
 			if len(nodesData) == 0 :
-				return '-1'
+				return [-1]
 
 			# Ordena a lista de 'nodes' com suas heuristicas
 			# A nodesData[0] é o novo node para recomeçar a busca
 			nodesData = sorted(nodesData , key=lambda k: [k[0]])
 
-	return '-1'
+	return [-1]
 
 # Calcula distancia entre dois pontos
 def __dist(pt0, pt1):

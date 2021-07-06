@@ -6,7 +6,7 @@ import GraphSearch as gs
 import time
 import numpy as np
 
-n_nodes = 20
+n_nodes = 500
 # Make Graph
 t = time.time()
 G, points = graph.makeGraph(n_nodes, 3)
@@ -19,53 +19,53 @@ print("\nSearching node " + str(target) + " from node " + str(origin))
 
 # Breadth
 t = time.time()
-string = gs.Breadth(G, origin, target)
+way = gs.Breadth(G, origin, target)
 print("\nBreadth time taken: " + "{:.6f}".format(time.time()-t))
 
-if string == '-1' :
+if way == [-1] :
 	print("Breadth: Not found!")
 else :
-	print("Found! The Breadth way is " + string)
+	print("Found! The Breadth way is " + str(way))
 
 # Depth
 t = time.time()
-string = gs.Depth(G, origin, target)
+way = gs.Depth(G, origin, target)
 print("\nDepth time taken: " + "{:.6f}".format(time.time()-t))
 
-if string == '-1' :
+if way == [-1] :
 	print("Depth: Not found!")
 else :
-	print("Found! The Depth way is " + string)
+	print("Found! The Depth way is " + str(way))
 
 # Best First
 t = time.time()
-string = gs.BestFirst(G, points, origin, target)
+way = gs.BestFirst(G, points, origin, target)
 print("\nBestFirst time taken: " + "{:.6f}".format(time.time()-t))
 
-if string == '-1' :
+if way == [-1] :
 	print("BestFirst: Not found!")
 else :
-	print("Found! The BestFirst way is " + string)
+	print("Found! The BestFirst way is " + str(way))
 
 # A Search
 t = time.time()
-string = gs.ASearch(G, points, origin, target)
+way = gs.ASearch(G, points, origin, target)
 print("\nASearch time taken: " + "{:.6f}".format(time.time()-t))
 
-if string == '-1' :
+if way == [-1] :
 	print("ASearch: Not found!")
 else :
-	print("Found! The ASearch way is " + string)
+	print("Found! The ASearch way is " + str(way))
 
 # A* Search
 t = time.time()
-string = gs.Asterix(G, points, origin, target)
+way = gs.Asterix(G, points, origin, target)
 print("\nAsterix time taken: " + "{:.6f}".format(time.time()-t))
 
-if string == '-1' :
+if way == [-1] :
 	print("Asterix: Not found!")
 else :
-	print("Found! The Asterix way is " + string)
+	print("Found! The Asterix way is " + str(way))
 
 
 plot.plotXY(G, points)
