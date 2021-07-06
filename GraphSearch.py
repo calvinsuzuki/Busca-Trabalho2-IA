@@ -120,7 +120,7 @@ def __BlindSearch(graph, origin, target, mode, DBG = False):
 	return [-1]
 
 # Função de busca heurística
-def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
+def __HeuristicSearch(graph, points, origin, target, G, H, DBG = True):
 
 	# Finaliza ao encontrar o caso especificado
 	if origin==target:
@@ -206,8 +206,8 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 				way.extend(WAY)
 				way.append(element)
 
-				# Depois de encontrado o caminho para um certo 'node'
-				# verifica se o caminho é melhor ou pior que um já encontrado
+				# Depois de encontrado a heuristica total para um certo 'node'
+				# verifica se este é melhor ou pior que um já encontrado
 				try:
 					position = np.where(np.array(nodesData, dtype="object")[:,2]==element)[0][0]
 
@@ -224,7 +224,7 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 
 			# Ordena a lista de 'nodes' com suas heuristicas
 			# A nodesData[0] é o novo node para recomeçar a busca
-			nodesData = sorted(nodesData , key=lambda k: [k[0]])
+			#nodesData = sorted(nodesData , key=lambda k: [k[0]])
 
 	return [-1]
 

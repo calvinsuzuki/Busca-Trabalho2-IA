@@ -30,6 +30,9 @@ def plotXY(graph, points, label = True):
         x_vec = [points[edge[0]][0], points[edge[1]][0]]
         y_vec = [points[edge[0]][1], points[edge[1]][1]]
         plt.plot(x_vec, y_vec)
+
+    plt.show()
+    
     
     
 def plotTimeResults(tests_mtx, time_mtx_mean, time_mtx_std, labels):
