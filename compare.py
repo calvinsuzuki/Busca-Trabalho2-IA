@@ -5,6 +5,7 @@ import plot
 import graph_search as gs
 import numpy as np
 import time
+import os
 
 def getLoadedGraph(n_nodes, n_edges):
     file = str(n_nodes) + '-' + str(n_edges) + '.npy'
@@ -25,7 +26,7 @@ tests_mtx = [[(500, 3), (500,5), (500, 7)],
 
 tests = [item for sublist in tests_mtx for item in sublist ]
 
-iter_times = 1
+iter_times = 50
 
 graph_time = []
 
@@ -46,8 +47,8 @@ for i in range(len(tests)):
     
     G, points = getLoadedGraph(n_nodes, n_edges)
 
-    print("Test " + str(i) + " - Nodes: " + str(n_nodes) + " , Edges: " + str(n_edges) + ": ")
-    # print("Made graph. Time taken: " + str(t_graph))
+    # print("Test " + str(i) + " - Nodes: " + str(n_nodes) + " , Edges: " + str(n_edges) + ": ")
+    # print("Made graph. Time taken: " + str(t_graph))C
     
     objective = [[np.random.randint(n_nodes), np.random.randint(n_nodes)] for i in range(iter_times)]
     # objective = [[0, 77] for i in range(iter_times)]
@@ -69,6 +70,10 @@ for i in range(len(tests)):
     t_test = time.time()
     # Do search for each algorithm iter_times 
     for j in range(iter_times):
+
+        os.system("clear")
+        print("Teste: " + str(i) + ": " + str(j*100/iter_times) + "%")
+
 
         # -----Breadth-----
         t = time.time()
@@ -134,9 +139,9 @@ for i in range(len(tests)):
     
     
     t_test = time.time() - t_test
-    print("Done!")
-    print(f"Test time taken: {t_test}")
-    print("-------------------" + '\n')
+    # print("Done!")
+    # print(f"Test time taken: {t_test}")
+    # print("-------------------" + '\n')
     
     # graph_time.append(t_graph)
     

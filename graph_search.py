@@ -142,7 +142,7 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 	nodesData = [(H*h_euclidian, 0, origin, [origin] )]
 
 	while(True) :
-
+		
 		if G==0 and H==0:
 			nodeMin = nodesData[0]
 		else:
