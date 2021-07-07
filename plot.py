@@ -110,7 +110,7 @@ def plotTimeResults(tests_mtx, time_mtx_mean, time_mtx_std, labels):
                 axs[i][j].set_title('v = {}, a = {}'.format(tests_mtx[i][j][0], tests_mtx[i][j][1]), fontsize=7)
                 axs[i][j].set_ylim([0, ylim])
                 for k in range(nmethods):
-                    axs[i][j].text(x[k] + 0.05, time_mtx_mean[ntest][k] + 1, str(round(time_mtx_mean[ntest][k],0)))
+                    axs[i][j].text(x[k] + 0.05, time_mtx_mean[ntest][k]*1000 + 1.1, str(round(time_mtx_mean[ntest][k]*1000,0)))
             
             else:
                 axs[ntest].bar(x, np.array(time_mtx_mean[ntest])*1000, 0.2, yerr = np.array(time_mtx_std[ntest])*1000, align='center',
@@ -121,7 +121,7 @@ def plotTimeResults(tests_mtx, time_mtx_mean, time_mtx_std, labels):
                 axs[ntest].set_title('v = {}, a = {}'.format(tests_mtx[i][j][0], tests_mtx[i][j][1]), fontsize=7)
                 axs[ntest].set_ylim([0, ylim])
                 for k in range(nmethods):
-                    axs[ntest].text(x[k] + 0.05, time_mtx_mean[ntest][k] + 1, str(round(time_mtx_mean[ntest][k],0)))
+                    axs[ntest].text(x[k] + 0.05, time_mtx_mean[ntest][k]*1000 + 1.1, str(round(time_mtx_mean[ntest][k]*1000,0)))
             ntest += 1 
     # set the spacing between subplots
     # figT.tight_layout()
@@ -169,7 +169,7 @@ def plotLenResults(tests_mtx, len_mtx_mean, len_mtx_std, labels):
                 axs[i][j].set_title('v = {}, a = {}'.format(tests_mtx[i][j][0], tests_mtx[i][j][1]), fontsize=7)
                 axs[i][j].set_ylim([0, ylim])
                 for k in range(nmethods):
-                    axs[i][j].text(x[k] + 0.05,len_mtx_mean[ntest][k] + 1, str(round(len_mtx_mean[ntest][k],0)))
+                    axs[i][j].text(x[k] + 0.05,len_mtx_mean[ntest][k] + 1.1, str(round(len_mtx_mean[ntest][k],0)))
             else:
                 axs[ntest].bar(x, np.array(len_mtx_mean[ntest]), 0.2, yerr = np.array(len_mtx_std[ntest]), align='center',
                             alpha=0.7, ecolor='black', capsize=5, color = 'red')
@@ -179,7 +179,7 @@ def plotLenResults(tests_mtx, len_mtx_mean, len_mtx_std, labels):
                 axs[ntest].set_title('v = {}, a = {}'.format(tests_mtx[i][j][0], tests_mtx[i][j][1]), fontsize=7)
                 axs[ntest].set_ylim([0, ylim])
                 for k in range(nmethods):
-                    axs[ntest].text(x[k] + 0.05,len_mtx_mean[ntest][k] + 1, str(round(len_mtx_mean[ntest][k],0)))
+                    axs[ntest].text(x[k] + 0.05,len_mtx_mean[ntest][k] + 1.1, str(round(len_mtx_mean[ntest][k],0)))
             ntest += 1 
     
 def plotDistResults(tests_mtx, dist_mtx_mean, dist_mtx_std, labels):
@@ -223,7 +223,7 @@ def plotDistResults(tests_mtx, dist_mtx_mean, dist_mtx_std, labels):
                 axs[i][j].set_title('v = {}, a = {}'.format(tests_mtx[i][j][0], tests_mtx[i][j][1]), fontsize=7)
                 axs[i][j].set_ylim([0, ylim])
                 for k in range(nmethods):
-                    axs[i][j].text(x[k] + 0.05,dist_mtx_mean[ntest][k] + 1, str(round(dist_mtx_mean[ntest][k],0)))
+                    axs[i][j].text(x[k] + 0.05,dist_mtx_mean[ntest][k] + 1.1, str(round(dist_mtx_mean[ntest][k],0)))
             
             else:
                 axs[ntest].bar(x, dist_mtx_mean[ntest], 0.2, yerr = dist_mtx_std[ntest], align='center',
@@ -235,7 +235,7 @@ def plotDistResults(tests_mtx, dist_mtx_mean, dist_mtx_std, labels):
                 axs[ntest].set_ylim([0, ylim])
                 
                 for k in range(nmethods):
-                    axs[ntest].text(x[k] + 0.05,dist_mtx_mean[ntest][k] + 1, str(round(dist_mtx_mean[ntest][k],0)))
+                    axs[ntest].text(x[k] + 0.05,dist_mtx_mean[ntest][k] + 1.1, str(round(dist_mtx_mean[ntest][k],0)))
             
             ntest += 1 
             

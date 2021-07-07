@@ -21,7 +21,7 @@ tests_mtx = [[(500, 3), (500,5), (500, 7)],
 
 tests = [item for sublist in tests_mtx for item in sublist ]
 
-iter_times = 50
+iter_times = 25
 
 dist_mtx = []
 
@@ -82,7 +82,7 @@ dist_mtx = np.array(dist_mtx)
 
 print(dist_mtx)
 
-num = 0
+num = 1
 file = 'dist-25' + str(num) + '.npy'
 with open(file, 'wb') as f:
     np.save(f, dist_mtx)
