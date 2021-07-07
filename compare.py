@@ -8,7 +8,7 @@ import time
 import os
 
 def getLoadedGraph(n_nodes, n_edges):
-    file = "graphs/" + str(n_nodes) + '-' + str(n_edges) + '.npy'
+    file = os.path.join('graphs', str(n_nodes) + '-' + str(n_edges) + '.npy')
     return graph.loadNodesAndMakeGraph(file)
 
 # Test case = [(n_nodes, n_edges), ...]

@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
 
-# Plota um grafo
+# Plota o grafo
 def plotGraph(graph):
     
     plt.plot()
@@ -84,8 +84,6 @@ def plotTimeResults(tests_mtx, time_mtx_mean, time_mtx_std, labels):
     
     figT.tight_layout(pad=3.0)
     
-    print("Making a {},{} graphic.".format(nrows, ncols))
-    
     x = np.arange(nmethods)/2
     
     ntest = 0
@@ -125,7 +123,7 @@ def plotTimeResults(tests_mtx, time_mtx_mean, time_mtx_std, labels):
     # set the spacing between subplots
     # figT.tight_layout()
 
-# Grafica os comparativos de distância em vértices comparativos de distância em vértices
+# Grafica os comparativos de distância em vértices 
 def plotLenResults(tests_mtx, len_mtx_mean, len_mtx_std, labels):
     
     nrows = len(tests_mtx)
@@ -140,10 +138,7 @@ def plotLenResults(tests_mtx, len_mtx_mean, len_mtx_std, labels):
     else:
         figL, axs = plt.subplots(nrows)
     
-    
     figL.tight_layout(pad=3.0)
-        
-    print("Making a {},{} graphic.".format(nrows, ncols))
     
     x = np.arange(nmethods)/2
     
@@ -275,7 +270,6 @@ def showMemoryUsage(memory_usage):
     ax.legend(loc='center left', title = "Escala linear")
     ax2.legend(loc='upper left', title = "Escala log.")
 
-# Grafica os comparativos de uso de memória por algoritmo
 def legends(handles):
     plt.legend(handles=handles)
 

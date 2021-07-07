@@ -9,18 +9,23 @@ tests = [[100, 3], [100, 5], [100, 7], [500, 3], [500, 5], [500, 7], [5000, 3], 
 critical_points = [[45, 83], [34, 63], [15, 24], [136, 318], [285, 98], [28, 133], [553, 1780], [179, 1722], [1978, 4043], [5157, 6698], [2106, 417], [377, 2880]]
 
 memory_usage = []
+
+# Itera para cada test na lista
 for i in range(len(tests)):
     
     test = tests[i]
     n_nodes = test[0]
     n_edges = test[1]
     
-    file = "graphs/" + str(n_nodes) + '-' + str(n_edges) + '.npy'
+    # Carrega o grafo
+    file = os.path.join('graphs', str(n_nodes) + '-' + str(n_edges) + '.npy')
     G, points = gm.loadNodesAndMakeGraph(file)
 
+    # Set ponto inicial e objetivo
     origin = critical_points[i][0]
     target = critical_points[i][1]
     
+    # Inicia a analise
     print(f"Test {i} - Nodes: {n_nodes}, Edges: {n_edges} - Critical point: ({origin},{target})")
     # ------------------Breadth
     tracemalloc.clear_traces()
@@ -76,6 +81,7 @@ for i in range(len(tests)):
     
 with open("memory-data.npy", 'wb') as f:
     np.save(f, memory_usage)
+
 
 plot.showMemoryUsage(memory_usage)
         
