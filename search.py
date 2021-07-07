@@ -1,8 +1,8 @@
 from networkx.algorithms.operators.product import tensor_product
 from networkx.classes.function import non_edges
-import graph
+import graph_maker as graph
 import plot
-import GraphSearch as gs
+import graph_search as gs
 import time
 import numpy as np
 
