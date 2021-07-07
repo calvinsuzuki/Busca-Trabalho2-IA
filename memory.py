@@ -15,7 +15,7 @@ for i in range(len(tests)):
     n_nodes = test[0]
     n_edges = test[1]
     
-    file = str(n_nodes) + '-' + str(n_edges) + '.npy'
+    file = "graphs/" + str(n_nodes) + '-' + str(n_edges) + '.npy'
     G, points = gm.loadNodesAndMakeGraph(file)
 
     origin = critical_points[i][0]
