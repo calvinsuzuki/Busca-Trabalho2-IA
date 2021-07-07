@@ -6,6 +6,7 @@ import plot
 import graph_search as gs
 import time
 import numpy as np
+import os
 
 # Simplifica a chamada para animação
 def drawWay(way, color, animate):
@@ -22,7 +23,7 @@ n_nodes = 500
 # Make Graph
 t = time.time()
 # USE IT IF WANT A PREDEFINED GRAPH
-G, points = graph.loadNodesAndMakeGraph('/graph/500-3.npy')
+G, points = graph.loadNodesAndMakeGraph(os.path.join('graphs','500-3.npy'))
 #G, points = graph.makeGraph(n_nodes, 3)
 print("makeGraph time taken: " + "{:.6f}".format(time.time()-t))
 
@@ -47,7 +48,7 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
-#anime(way, 'red')
+drawWay(way, 'red', False)
 
 # Depth
 t = time.time()
@@ -60,7 +61,7 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
-#anime(way, 'blue')
+drawWay(way, 'blue', False)
 
 
 # Best First
@@ -74,7 +75,7 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
-# anime(way, 'darkorange')
+drawWay(way, 'darkorange', False)
 
 # A Search
 t = time.time()
@@ -87,7 +88,7 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
-# anime(way, 'm')
+drawWay(way, 'm', False)
 
 # A* Search
 t = time.time()
@@ -100,6 +101,6 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
-anime(way, 'green')
-plot.legends([green])
+drawWay(way, 'green', False)
+plot.legends([red, blue, orange, violet, green])
 plot.Show()
