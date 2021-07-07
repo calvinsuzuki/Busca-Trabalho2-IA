@@ -50,7 +50,7 @@ else :
 #anime(way, 'red')
 
 # Depth
-# t = time.time()
+t = time.time()
 way = gs.Depth(G, origin, target)
 print("\n*****\tDepth\t*****" )  
 print("Time taken: " + "{:.6f}".format(time.time()-t))
@@ -64,7 +64,7 @@ else :
 
 
 # Best First
-# t = time.time()
+t = time.time()
 way = gs.BestFirst(G, points, origin, target)
 print("\n*****\tBFSearch\t*****" )  
 print("Time taken: " + "{:.6f}".format(time.time()-t))
@@ -77,7 +77,7 @@ else :
 # anime(way, 'darkorange')
 
 # A Search
-# t = time.time()
+t = time.time()
 way = gs.ASearch(G, points, origin, target)
 print("\n*****\tASearch\t*****" )  
 print("Time taken: " + "{:.6f}".format(time.time()-t))
@@ -90,7 +90,7 @@ else :
 # anime(way, 'm')
 
 # A* Search
-# t = time.time()
+t = time.time()
 way = gs.Asterix(G, points, origin, target)
 print("\n*****\tAsterix\t*****" )  
 print("Time taken: " + "{:.6f}".format(time.time()-t))
