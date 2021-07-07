@@ -41,17 +41,25 @@ def plotXY(graph, points, label_u = False):
 
     return figG, ax 
 
-def plotPath(ax, path, points, color = 'red', wait = 3):
+def plotPath(ax, path, points, color = 'red', linewidth=3, wait = 0.001):
     
-    max_i =len(path)-2
-    
+    max_i =len(path)-1
+
+    x = points[path[0]][0]
+    y = points[path[0]][1]
+    plt.scatter(x,y,color = 'red')
+
+    x = points[path[len(path)-1]][0]
+    y = points[path[len(path)-1]][1]
+    plt.scatter(x,y,color = 'green')
+
     for i in range(max_i):
         x_vec = [points[path[i]][0], points[path[i+1]][0]]
         y_vec = [points[path[i]][1], points[path[i+1]][1]]
         
-        ax.plot(x_vec, y_vec, color = color)
-        plt.show(block=False)
-        plt.pause(wait)
+        ax.plot(x_vec, y_vec, color = color, linewidth=linewidth)
+        #plt.show(block=False)
+        #plt.pause(wait)
         
     return ax
 
@@ -60,14 +68,6 @@ def PlotVisitedNodes(ax, visited, color):
     # for i in range(len(visited)):
     #     ax.scatter()
     pass
-
-def animate():
-    
-    plt.show(block=False)
-    plt.pause(0.5)
-    
-    
-
 
 def plotTimeResults(tests_mtx, time_mtx_mean, time_mtx_std, labels):
     
@@ -121,8 +121,7 @@ def plotTimeResults(tests_mtx, time_mtx_mean, time_mtx_std, labels):
             ntest += 1 
     # set the spacing between subplots
     # figT.tight_layout()
-    
-    
+       
 def plotLenResults(tests_mtx, len_mtx_mean, len_mtx_std, labels):
     
     nrows = len(tests_mtx)
@@ -178,4 +177,9 @@ def plotLenResults(tests_mtx, len_mtx_mean, len_mtx_std, labels):
     
 def Show():
     plt.show()
+
+def legends(handles):
+    plt.legend(handles=handles)
+
+
     
