@@ -178,4 +178,29 @@ def plotLenResults(tests_mtx, len_mtx_mean, len_mtx_std, labels):
     
 def Show():
     plt.show()
+
+
+
+
+
+def showMemoryUsage(memory_usage):
     
+    memory_usage = np.array(memory_usage)
+    
+    xlabels = ['100,3','100,7','100,7','500,3','500,5','500,7','5000,3','5000,5','5000,7','10000,3','10000,5','10000,7']
+    
+    plt.style.use('ggplot')
+    figM = plt.figure()
+    ax = plt.axes()
+    
+    ax.set_xticks(np.arange(12))
+    ax.set_xticklabels(xlabels)
+    ax.set_xlabel('Vértices, Arestas')
+    
+    colors = ['red', 'blue', 'darkorange', 'm', 'green']
+    labels = ['Breadth', 'Depth', 'BFSearch', 'ASearch', 'Asterix']
+    
+    for i in range(len(memory_usage[0])):
+        ax.plot(memory_usage[:,i], '-o', color = colors[i], label = labels[i])
+        
+    ax.legend()
