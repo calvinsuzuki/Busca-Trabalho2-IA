@@ -187,20 +187,32 @@ def showMemoryUsage(memory_usage):
     
     memory_usage = np.array(memory_usage)
     
-    xlabels = ['100,3','100,7','100,7','500,3','500,5','500,7','5000,3','5000,5','5000,7','10000,3','10000,5','10000,7']
+    xlabels = ['(100,3)','(100,7)','(100,7)','(500,3)','(500,5)','(500,7)','(5000,3)','(5000,5)','(5000,7)','(10000,3)','(10000,5)','(10000,7)']
     
     plt.style.use('ggplot')
+    plt.rcParams.update({'font.size': 10})
     figM = plt.figure()
     ax = plt.axes()
     
     ax.set_xticks(np.arange(12))
     ax.set_xticklabels(xlabels)
-    ax.set_xlabel('Vértices, Arestas')
+    ax.set_xlabel('(Vértices, Arestas)')
+    ax.set_ylabel('Alocação máxima (kB)')
+    ax.set_ylim([0,800])
     
     colors = ['red', 'blue', 'darkorange', 'm', 'green']
     labels = ['Breadth', 'Depth', 'BFSearch', 'ASearch', 'Asterix']
     
     for i in range(len(memory_usage[0])):
-        ax.plot(memory_usage[:,i], '-o', color = colors[i], label = labels[i])
-        
-    ax.legend()
+        if i == 1:
+            continue
+        ax.plot(memory_usage[:,i]/1000, '-o', color = colors[i], label = labels[i])
+    
+    ax2 = ax.twinx()
+    ax2.plot(memory_usage[:,1]/1000, marker=9, color='blue', linestyle = '--', label = 'Depth')
+    ax2.set_yscale('log', base=10)
+    ax2.tick_params(axis='y')
+    ax2.set_ylabel('Alocação máxima em log. (kB) ')
+    
+    ax.legend(loc='center left', title = "Escala linear")
+    ax2.legend(loc='upper left', title = "Escala log.")
