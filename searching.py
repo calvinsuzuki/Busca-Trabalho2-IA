@@ -6,16 +6,16 @@ import GraphSearch as gs
 import time
 import numpy as np
 
-n_nodes = 20
+n_nodes = 10000
 # Make Graph
 t = time.time()
 # USE IT IF WANT A PREDEFINED GRAPH
-G, points = graph.loadNodesAndMakeGraph('1000-3.npy')
+G, points = graph.loadNodesAndMakeGraph('10000-3.npy')
 #G, points = graph.makeGraph(n_nodes, 3)
 print("makeGraph time taken: " + "{:.6f}".format(time.time()-t))
 
-origin = 633
-target = 109
+origin = 45
+target = 83
 
 # origin = np.random.randint(n_nodes)
 # target = np.random.randint(n_nodes)
@@ -83,4 +83,4 @@ else :
 	print("The way is " + str(way))
 
 
-plot.plotXY(G, points)
+# plot.plotXY(G, points)

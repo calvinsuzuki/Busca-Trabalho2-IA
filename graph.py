@@ -130,13 +130,18 @@ if __name__=='__main__':
     # plot.plotXY(G, points)
     # plot.Show()
     
+    # savePointsAndEdges("100-3.npy", 100, 3)
+    # savePointsAndEdges("100-5.npy", 100, 5)
+    # savePointsAndEdges("100-7.npy", 100, 7)
     
-    savePointsAndEdges("10000-3.npy", 10000, 3)
-    
+    # savePointsAndEdges("500-3.npy", 500, 3)
+    # savePointsAndEdges("500-5.npy", 500, 5)
+    # savePointsAndEdges("500-7.npy", 500, 7)
+
     # path = [1,2,3,5,4,6,9,10]
     
-    # G, points = loadNodesAndMakeGraph('5000-3.npy')
+    G, points = loadNodesAndMakeGraph('100-3.npy')
     
-    # figG, ax = plot.plotXY(G, points)
+    figG, ax = plot.plotXY(G, points, label_u=True)
     # plot.plotPath(ax, path, points, color = 'red', time = 5)
-    # plot.Show()
+    plot.Show()
