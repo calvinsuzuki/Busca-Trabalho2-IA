@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import random
 import numpy as np
 import networkx as nx
+import time
+
 
 # Busca por profundidade
 def Depth(graph, origin, target):
@@ -129,17 +131,23 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 		return [origin]
 
 	# Heuristica euclidiana
-	h_euclidian = __dist(points[origin], points[target])
+	if H!=0 :
+		h_euclidian = __dist(points[origin], points[target])
+	else :
+		h_euclidian = 0
 	# Lista heuristica euclidiana
-	euclidian_list = [ [h_euclidian, origin] ]
+	visited = [ [origin] ]
 	# Lista heuristica
 	#           ( HTotal ; HCaminho ; Nó ; Caminho ao Nó )
 	nodesData = [(H*h_euclidian, 0, origin, [origin] )]
 
 	while(True) :
 
-		# Analisa o 'node' com a menor heuristica
-		nodeMin = getMinNode(nodesData)
+		if G==0 and H==0:
+			nodeMin = nodesData[0]
+		else:
+			# Analisa o 'node' com a menor heuristica
+			nodeMin = getMinNode(nodesData)
 
 		HTOTAL = nodeMin[0]
 		HWAY = nodeMin[1]
@@ -164,6 +172,8 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 		# Remove 'node' da lista de procura
 		nodesData.remove(nodeMin)
 
+		visited.append(NODE)
+
 		# Se 'node' nao possui vizinhos
 		if len(neighbors) == 0 :
 
@@ -173,21 +183,21 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 			# Se a lista de nós for vazia: Nó não encontrado!
 			if len(nodesData) == 0 :
 				return [-1]
-			
 
 		# Se 'node' possui vizinhos
 		else :
-
-			for element in WAY :
+			# Remove os vizinhos já presentes na lista de visitados
+			for element in visited :
 				try:
 					neighbors.remove(element)
+					# print("HEY! I know you... ("+str(euclidian_list[i][1])+")")					
 				except:
 					pass
+					# print("I must be mistaken. ("+str(euclidian_list[i][1])+")")	
 
-
-			for i in range(len(euclidian_list)) :
+			for i in range(len(nodesData)) :
 				try:
-					neighbors.remove(euclidian_list[i][1])
+					neighbors.remove(nodesData[i][2])
 					# print("HEY! I know you... ("+str(euclidian_list[i][1])+")")					
 				except:
 					pass
@@ -196,12 +206,10 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 			# Insere novos 'nodes' na lista
 			for element in neighbors :
 				# Heuristica euclidiana [ [dist, node] ]
-				try:
-					h_euclidian = euclidian_list[np.where(np.array(euclidian_list, dtype="object")[:,1] == element)][0][0]
-					# print("HEY! I know you... ("+str(element)+")")
-				except:
+				if H != 0 :
 					h_euclidian = __dist(points[element], points[target])
-					euclidian_list.append([h_euclidian, element])
+				else :
+					h_euclidian = 0
 
 				# print("Visited list ("+str(euclidian_list)+")")
 
@@ -219,17 +227,7 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 				way.extend(WAY)
 				way.append(element)
 
-				# Depois de encontrado a heuristica total para um certo 'node'
-				# verifica se este é melhor ou pior que um já encontrado
-				try:
-					position = np.where(np.array(nodesData, dtype="object")[:,2]==element)[0][0]
-
-					if h_total < nodesData[position][0] :
-						nodesData.pop(position)
-						nodesData.append( (h_total, h_way, element, way) )	
-
-				except:
-					nodesData.append( (h_total, h_way, element, way) )	
+				nodesData.append( (h_total, h_way, element, way) )
 
 			# E se a lista de procura for vazia
 			if len(nodesData) == 0 :
@@ -246,7 +244,8 @@ def __dist(pt0, pt1):
     return np.sqrt((pt0[0]-pt1[0])**2+(pt0[1]-pt1[1])**2)
 
 def getMinNode(nodesData):
-	position = np.where(np.array(nodesData, dtype="object")[:,0]==np.amin(np.array(nodesData, dtype="object")[:,0]))[0][0]
 
-	return nodesData[position]
+	nodesData = sorted(nodesData , key=lambda k: [k[0]])
+
+	return nodesData[0]
 

@@ -140,7 +140,7 @@ if __name__=='__main__':
 
     # path = [1,2,3,5,4,6,9,10]
     
-    G, points = loadNodesAndMakeGraph('100-3.npy')
+    G, points = loadNodesAndMakeGraph('5000-3.npy')
     
     figG, ax = plot.plotXY(G, points, label_u=True)
     # plot.plotPath(ax, path, points, color = 'red', time = 5)
