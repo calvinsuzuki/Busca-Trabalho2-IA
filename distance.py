@@ -21,7 +21,7 @@ tests_mtx = [[(500, 3), (500,5), (500, 7)],
 
 tests = [item for sublist in tests_mtx for item in sublist ]
 
-iter_times = 25
+iter_times = 1
 
 dist_mtx = []
 
@@ -33,7 +33,7 @@ for i in range(len(tests)):
     n_nodes = test[0]
     n_edges = test[1]
     
-    file = "graphs/" + str(n_nodes) + '-' + str(n_edges) + '.npy'
+    file = os.path.join('graphs', str(n_nodes) + '-' + str(n_edges) + '.npy')
     G, points = gm.loadNodesAndMakeGraph(file)
 
     objective = [[np.random.randint(n_nodes), np.random.randint(n_nodes)] for i in range(iter_times)]

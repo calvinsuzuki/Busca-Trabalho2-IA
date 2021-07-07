@@ -5,16 +5,12 @@ def plotMemory():
     with open("data/memory-data.npy", 'rb') as f:
         memory_usage = np.load(f)
 
-    print(memory_usage)
-
     plot.showMemoryUsage(memory_usage)
     plot.Show()
 
 def plotLen():
     with open('data/len-100x.npy', 'rb') as f:
         len_full = np.load(f)
-
-    print(len_full)
 
     tests_mtx = [[(500, 3), (500,5), (500, 7)],
                 [(5000, 3), (5000, 5), (5000, 7)],
@@ -27,8 +23,6 @@ def plotLen():
 def plotTime():
     with open('data/time-100x.npy', 'rb') as f:
         t_full = np.load(f)
-        
-    print(t_full)
 
     tests_mtx = [[(500, 3), (500,5), (500, 7)],
                     [(5000, 3), (5000, 5), (5000, 7)],
@@ -52,7 +46,9 @@ def plotDist():
     plot.plotDistResults(tests_mtx, dist_full[:,:,0], dist_full[:,:,2], labels)
     plot.Show()
 
+print("Type 'q' to move to next plot!")
+plotTime()
 plotDist()
 plotLen()
-plotTime()
+plotMemory()
 
