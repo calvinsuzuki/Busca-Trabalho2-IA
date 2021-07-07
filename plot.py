@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
 
+# Plota um grafo
 def plotGraph(graph):
     
     plt.plot()
@@ -10,6 +11,7 @@ def plotGraph(graph):
 
     plt.show()
 
+# Plota todos os pontos de um grafo
 def plotXY(graph, points, label_u = False):
     
     edges = list(graph.edges)
@@ -41,7 +43,8 @@ def plotXY(graph, points, label_u = False):
 
     return figG, ax 
 
-def plotPath(ax, path, points, color = 'red', linewidth=3, wait = 0.001):
+# Desenha um caminho sobre os pontos de um certo caminho
+def plotPath(ax, path, points, animate, color = 'red', linewidth=3, wait = 0.001):
     
     max_i =len(path)-1
 
@@ -58,17 +61,13 @@ def plotPath(ax, path, points, color = 'red', linewidth=3, wait = 0.001):
         y_vec = [points[path[i]][1], points[path[i+1]][1]]
         
         ax.plot(x_vec, y_vec, color = color, linewidth=linewidth)
-        #plt.show(block=False)
-        #plt.pause(wait)
+        if animate:
+            plt.show(block=False)
+            plt.pause(wait=wait)
         
     return ax
 
-def PlotVisitedNodes(ax, visited, color):
-    
-    # for i in range(len(visited)):
-    #     ax.scatter()
-    pass
-
+# Grafica os comparativos de tempo
 def plotTimeResults(tests_mtx, time_mtx_mean, time_mtx_std, labels):
     
     nrows = len(tests_mtx)
@@ -125,7 +124,8 @@ def plotTimeResults(tests_mtx, time_mtx_mean, time_mtx_std, labels):
             ntest += 1 
     # set the spacing between subplots
     # figT.tight_layout()
-       
+
+# Grafica os comparativos de distância em vértices comparativos de distância em vértices
 def plotLenResults(tests_mtx, len_mtx_mean, len_mtx_std, labels):
     
     nrows = len(tests_mtx)
@@ -181,7 +181,8 @@ def plotLenResults(tests_mtx, len_mtx_mean, len_mtx_std, labels):
                 for k in range(nmethods):
                     axs[ntest].text(x[k] + 0.05,len_mtx_mean[ntest][k] + 1.1, str(round(len_mtx_mean[ntest][k],0)))
             ntest += 1 
-    
+
+# Grafica os comparativos de distância euclidiana percorrida
 def plotDistResults(tests_mtx, dist_mtx_mean, dist_mtx_std, labels):
     
     nrows = len(tests_mtx)
@@ -239,8 +240,7 @@ def plotDistResults(tests_mtx, dist_mtx_mean, dist_mtx_std, labels):
             
             ntest += 1 
             
-                
-    
+# Grafica os comparativos de uso de memória por algoritmo
 def showMemoryUsage(memory_usage):
     
     memory_usage = np.array(memory_usage)
@@ -274,7 +274,8 @@ def showMemoryUsage(memory_usage):
     
     ax.legend(loc='center left', title = "Escala linear")
     ax2.legend(loc='upper left', title = "Escala log.")
-    
+
+# Grafica os comparativos de uso de memória por algoritmo
 def legends(handles):
     plt.legend(handles=handles)
 
