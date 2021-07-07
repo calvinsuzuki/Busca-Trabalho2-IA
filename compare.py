@@ -1,14 +1,14 @@
 from networkx.algorithms.operators.product import tensor_product
 from networkx.classes.function import non_edges
-import graph
+import graph_maker as graph
 import plot
-import GraphSearch as gs
+import graph_search as gs
 import numpy as np
 import time
 
-# def getLoadedGraph(n_nodes, n_edges):
-#     if n_nodes == 500 and n_edges ==3:
-#         return
+def getLoadedGraph(n_nodes, n_edges):
+    file = str(n_nodes) + '-' + str(n_edges) + '.npy'
+    return graph.loadNodesAndMakeGraph(file)
 
 # Test case = [(n_nodes, n_edges), ...]
 # tests_mtx = [[(200, 3), (200, 5), (200,7)],
@@ -19,9 +19,9 @@ import time
 # tests_mtx = [[(500, 3)],
 #              [(1000, 3)],
 #              [(2000,3)]]
-tests_mtx = [[(500, 3)],
-             [(5000, 3)],
-             [(10000,3)]]
+tests_mtx = [[(500, 3), (500,5), (500, 7)],
+             [(5000, 3), (5000, 5), (5000, 7)],
+             [(10000,3), (10000, 5), (10000, 7)]]
 
 tests = [item for sublist in tests_mtx for item in sublist ]
 
@@ -35,10 +35,6 @@ len_mtx_stat = []
 
 labels = ['Breadth', 'Depth', 'Best First', 'A', 'A*']
 
-G500, points500 = graph.loadNodesAndMakeGraph('500-3.npy')
-G5000, points5000 = graph.loadNodesAndMakeGraph('5000-3.npy')
-G10000, points10000 = graph.loadNodesAndMakeGraph('10000-3.npy')
-
 for i in range(len(tests)):
 
     n_nodes = tests[i][0]
@@ -48,18 +44,10 @@ for i in range(len(tests)):
     # G, points = graph.makeGraph(n_nodes, n_edges)
     # t_graph = time.time() - 
     
-    if n_nodes == 500:
-        G = G500
-        points = points500
-    elif n_nodes == 5000:
-        G = G5000
-        points = points5000
-    elif n_nodes == 10000:
-        G = G10000
-        points = points10000
+    G, points = getLoadedGraph(n_nodes, n_edges)
 
     print("Test " + str(i) + " - Nodes: " + str(n_nodes) + " , Edges: " + str(n_edges) + ": ")
-    print("Made graph. Time taken: " + str(t_graph))
+    # print("Made graph. Time taken: " + str(t_graph))
     
     objective = [[np.random.randint(n_nodes), np.random.randint(n_nodes)] for i in range(iter_times)]
     # objective = [[0, 77] for i in range(iter_times)]
@@ -78,6 +66,7 @@ for i in range(len(tests)):
     len_A_aux = []
     len_Astar_aux = []
     
+    t_test = time.time()
     # Do search for each algorithm iter_times 
     for j in range(iter_times):
 
@@ -143,11 +132,13 @@ for i in range(len(tests)):
     
     len_Astar_stat =  np.array([np.mean(len_Astar_aux), np.var(len_Astar_aux), np.std(len_Astar_aux)])
     
-    print("Done!")
     
+    t_test = time.time() - t_test
+    print("Done!")
+    print(f"Test time taken: {t_test}")
     print("-------------------" + '\n')
     
-    graph_time.append(t_graph)
+    # graph_time.append(t_graph)
     
     t_mtx_stat.append([t_breadth_stat, t_depth_stat, t_bestf_stat, t_A_stat, t_Astar_stat])
     
