@@ -35,9 +35,9 @@ len_mtx_stat = []
 
 labels = ['Breadth', 'Depth', 'Best First', 'A', 'A*']
 
-G500, points500 = graph.loadNodesAndMakeGraph('500-3.py')
-G5000, points5000 = graph.loadNodesAndMakeGraph('5000-3.py')
-G10000, points10000 = graph.loadNodesAndMakeGraph('10000-3.py')
+G500, points500 = graph.loadNodesAndMakeGraph('500-3.npy')
+G5000, points5000 = graph.loadNodesAndMakeGraph('5000-3.npy')
+G10000, points10000 = graph.loadNodesAndMakeGraph('10000-3.npy')
 
 for i in range(len(tests)):
 

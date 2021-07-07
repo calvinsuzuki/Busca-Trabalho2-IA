@@ -131,7 +131,7 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 	# Heuristica euclidiana
 	h_euclidian = __dist(points[origin], points[target])
 	# Lista heuristica euclidiana
-	euclidian_list = np.array([ [h_euclidian, origin] ])
+	euclidian_list = [ [h_euclidian, origin] ]
 	# Lista heuristica
 	#           ( HTotal ; HCaminho ; Nó ; Caminho ao Nó )
 	nodesData = [(H*h_euclidian, 0, origin, [origin] )]
@@ -184,14 +184,26 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 				except:
 					pass
 
+
+			for i in range(len(euclidian_list)) :
+				try:
+					neighbors.remove(euclidian_list[i][1])
+					# print("HEY! I know you... ("+str(euclidian_list[i][1])+")")					
+				except:
+					pass
+					# print("I must be mistaken. ("+str(euclidian_list[i][1])+")")	
+
 			# Insere novos 'nodes' na lista
 			for element in neighbors :
-				# Heuristica euclidiana ([node][dist])
+				# Heuristica euclidiana [ [dist, node] ]
 				try:
-					h_euclidian = euclidian_list[np.where(euclidian_list[:,1] == element)][0][0]
+					h_euclidian = euclidian_list[np.where(np.array(euclidian_list, dtype="object")[:,1] == element)][0][0]
+					# print("HEY! I know you... ("+str(element)+")")
 				except:
 					h_euclidian = __dist(points[element], points[target])
-					euclidian_list = np.append(euclidian_list, [ [h_euclidian, element] ], 0 )
+					euclidian_list.append([h_euclidian, element])
+
+				# print("Visited list ("+str(euclidian_list)+")")
 
 				if G != 0 :
 					# Heuristica de caminho
