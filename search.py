@@ -7,9 +7,11 @@ import graph_search as gs
 import time
 import numpy as np
 
-def anime(way, color):
-	plot.plotPath(axis, way, points, color)
+# Simplifica a chamada para animação
+def drawWay(way, color, animate):
+	plot.plotPath(axis, way, points, animate, color)
 
+# Define os Patches na legenda do gráfico
 red = mpatches.Patch(color='red', label='Largura')
 blue = mpatches.Patch(color='blue', label='Profundidade')
 orange = mpatches.Patch(color='darkorange', label='Best First')
@@ -20,7 +22,7 @@ n_nodes = 500
 # Make Graph
 t = time.time()
 # USE IT IF WANT A PREDEFINED GRAPH
-G, points = graph.loadNodesAndMakeGraph('500-3.npy')
+G, points = graph.loadNodesAndMakeGraph('/graph/500-3.npy')
 #G, points = graph.makeGraph(n_nodes, 3)
 print("makeGraph time taken: " + "{:.6f}".format(time.time()-t))
 
@@ -72,7 +74,7 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
-# plot.plotPath(axis, way, points, 'darkorange', 3)
+# anime(way, 'darkorange')
 
 # A Search
 # t = time.time()
@@ -85,7 +87,7 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
-# plot.plotPath(axis, way, points, 'm', 2)
+# anime(way, 'm')
 
 # A* Search
 # t = time.time()

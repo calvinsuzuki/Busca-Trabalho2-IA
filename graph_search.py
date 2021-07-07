@@ -15,14 +15,17 @@ def Breadth(graph, origin, target):
 
 	return __BlindSearch(graph, origin, target, "Breadth")
 
+# Busca por BestFirst
 def BestFirst(graph, points, origin, target):
 	
 	return __HeuristicSearch(graph, points, origin, target, 0, 1)
 
+# Busca por BestFirst A
 def ASearch(graph, points, origin, target):
 
 	return __HeuristicSearch(graph, points, origin, target, 1, 10)
 
+# Busca por BestFirst A*
 def Asterix(graph, points, origin, target):
 
 	return __HeuristicSearch(graph, points, origin, target, 1, 1)
@@ -51,18 +54,9 @@ def __BlindSearch(graph, origin, target, mode, DBG = False):
 			print("Searching list is " + str(search))
 			print("L = " + str(src_way))
 
-		if mode == "Depth" :
-			position = len(search)-1
-		# No final da lista
-		if mode == "Breadth" :
-			position = 0
-
-		# Define o novo node para recomeçar a busca
-		node = search[position]
-
 		# Se o nó procurado for esse, retorne True
 		if target==node:
-			return src_way[position]
+			return src_way[0]
 
 		if DBG :
 			print("Not found! Lets see "+str(node)+" neighbors...")
@@ -71,14 +65,10 @@ def __BlindSearch(graph, origin, target, mode, DBG = False):
 		neighbors = list(graph.neighbors(node))
 
 		# Remove 'node' da lista de procura
-		search.pop(position)
-		aux_str = src_way.pop(position)
+		search.pop(0)
+		aux_str = src_way.pop(0)
 
-		position-=1
-
-		if position == -1:
-			position = 0
-
+		# Adiciona o 'node' visitado na lista de visitados
 		visited.append(node)
 
 		# Se 'node' nao possui vizinhos
@@ -92,40 +82,49 @@ def __BlindSearch(graph, origin, target, mode, DBG = False):
 				return [-1]
 			
 			# Retira-se o item da lista 
-			search.pop(position)
-			src_way.pop(position)
-			node = search[position]
+			search.pop(0)
+			src_way.pop(0)
+			node = search[0]
 
 		# Se 'node' possui vizinhos
 		else :
+
+			# Filtragem de vizinhos
+
 			# Remove os vizinhos já presentes na lista de visitados
 			for element in visited :
 				try :
 					neighbors.remove(element)
 				except :
 					pass
-
 			# Remove os vizinhos já presentes na lista de procura
 			for element in search :
 				try :
 					neighbors.remove(element)
 				except :
 					pass
-			# Insere novos 'nodes' na lista de procura
+
+			# Insere vizinhos filtrados na lista de procura
 			for element in neighbors :
 				# Caminho
 				way = []
 				way.extend(aux_str)
 				way.append(element)
+				# No começo da lista
+				if mode == "Depth" :
+					src_way.insert(0, way )	
+					search.insert(0, element )
+				# No final da lista
+				if mode == "Breadth" :
+					src_way.append( way )	
+					search.append( element )
 
-				src_way.append( way )	
-				search.append( element )
-
-			# E se a lista de procura for vazia
+			# Se a lista de procura for vazia, caminho não encontrado!
 			if len(search) == 0 :
 				return [-1]
 
-			
+			# Define o novo 'node' para recomeçar a busca
+			node = search[0]
 
 	return [-1]
 
@@ -145,8 +144,7 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 		h_euclidian = 0
 	# Lista heuristica euclidiana
 	visited = [ [origin] ]
-	# Lista heuristica
-	#           ( HTotal ; HCaminho ; Nó ; Caminho ao Nó )
+	# Lista heuristica = ( HTotal ; HCaminho ; Nó ; Caminho ao Nó )
 	nodesData = [(H*h_euclidian, 0, origin, [origin] )]
 
 	while(True) :
@@ -154,9 +152,10 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 		if G==0 and H==0:
 			nodeMin = nodesData[0]
 		else:
-			# Analisa o 'node' com a menor heuristica
+			# Adquire o 'node' com a menor heuristica
 			nodeMin = getMinNode(nodesData)
 
+		# Registra variaveis auxiliares
 		HTOTAL = nodeMin[0]
 		HWAY = nodeMin[1]
 		NODE = nodeMin[2]
@@ -180,6 +179,7 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 		# Remove 'node' da lista de procura
 		nodesData.remove(nodeMin)
 
+		# Adiciona 'node' na lista de visitados
 		visited.append(NODE)
 
 		# Se 'node' nao possui vizinhos
@@ -197,29 +197,24 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 			# Remove os vizinhos já presentes na lista de visitados
 			for element in visited :
 				try:
-					neighbors.remove(element)
-					# print("HEY! I know you... ("+str(euclidian_list[i][1])+")")					
+					neighbors.remove(element)				
 				except:
 					pass
-					# print("I must be mistaken. ("+str(euclidian_list[i][1])+")")	
-
+			# Remove os vizinhos já presentes na lista de procura
 			for i in range(len(nodesData)) :
 				try:
-					neighbors.remove(nodesData[i][2])
-					# print("HEY! I know you... ("+str(euclidian_list[i][1])+")")					
+					neighbors.remove(nodesData[i][2])				
 				except:
 					pass
-					# print("I must be mistaken. ("+str(euclidian_list[i][1])+")")	
 
 			# Insere novos 'nodes' na lista
 			for element in neighbors :
-				# Heuristica euclidiana [ [dist, node] ]
+				
 				if H != 0 :
+					# Heuristica euclidiana [ [dist, node] ]
 					h_euclidian = __dist(points[element], points[target])
 				else :
 					h_euclidian = 0
-
-				# print("Visited list ("+str(euclidian_list)+")")
 
 				if G != 0 :
 					# Heuristica de caminho
@@ -237,12 +232,9 @@ def __HeuristicSearch(graph, points, origin, target, G, H, DBG = False):
 
 				nodesData.append( (h_total, h_way, element, way) )
 
-			# E se a lista de procura for vazia
+			# Se a lista de procura for vazia, entao, caminho nao encontrado
 			if len(nodesData) == 0 :
 				return [-1]
-
-			# Ordena a lista de 'nodes' com suas heuristicas
-			# A nodesData[0] é o novo node para recomeçar a busca
 
 	return [-1]
 
@@ -251,6 +243,7 @@ def __dist(pt0, pt1):
     
     return np.sqrt((pt0[0]-pt1[0])**2+(pt0[1]-pt1[1])**2)
 
+# Ordena a lista de procura e retorna o menor elemento heuristico
 def getMinNode(nodesData):
 
 	nodesData = sorted(nodesData , key=lambda k: [k[0]])
