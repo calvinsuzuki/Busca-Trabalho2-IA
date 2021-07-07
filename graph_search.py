@@ -51,9 +51,18 @@ def __BlindSearch(graph, origin, target, mode, DBG = False):
 			print("Searching list is " + str(search))
 			print("L = " + str(src_way))
 
+		if mode == "Depth" :
+			position = len(search)-1
+		# No final da lista
+		if mode == "Breadth" :
+			position = 0
+
+		# Define o novo node para recomeçar a busca
+		node = search[position]
+
 		# Se o nó procurado for esse, retorne True
 		if target==node:
-			return src_way[0]
+			return src_way[position]
 
 		if DBG :
 			print("Not found! Lets see "+str(node)+" neighbors...")
@@ -62,8 +71,13 @@ def __BlindSearch(graph, origin, target, mode, DBG = False):
 		neighbors = list(graph.neighbors(node))
 
 		# Remove 'node' da lista de procura
-		search.pop(0)
-		aux_str = src_way.pop(0)
+		search.pop(position)
+		aux_str = src_way.pop(position)
+
+		position-=1
+
+		if position == -1:
+			position = 0
 
 		visited.append(node)
 
@@ -78,9 +92,9 @@ def __BlindSearch(graph, origin, target, mode, DBG = False):
 				return [-1]
 			
 			# Retira-se o item da lista 
-			search.pop(0)
-			src_way.pop(0)
-			node = search[0]
+			search.pop(position)
+			src_way.pop(position)
+			node = search[position]
 
 		# Se 'node' possui vizinhos
 		else :
@@ -103,21 +117,15 @@ def __BlindSearch(graph, origin, target, mode, DBG = False):
 				way = []
 				way.extend(aux_str)
 				way.append(element)
-				# No começo da lista
-				if mode == "Depth" :
-					src_way.insert(0, way )	
-					search.insert(0, element )
-				# No final da lista
-				if mode == "Breadth" :
-					src_way.append( way )	
-					search.append( element )
+
+				src_way.append( way )	
+				search.append( element )
 
 			# E se a lista de procura for vazia
 			if len(search) == 0 :
 				return [-1]
 
-			# Define o novo node para recomeçar a busca
-			node = search[0]
+			
 
 	return [-1]
 

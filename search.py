@@ -7,20 +7,25 @@ import graph_search as gs
 import time
 import numpy as np
 
-
 def anime(way, color):
 	plot.plotPath(axis, way, points, color)
+
+red = mpatches.Patch(color='red', label='Largura')
+blue = mpatches.Patch(color='blue', label='Profundidade')
+orange = mpatches.Patch(color='darkorange', label='Best First')
+violet = mpatches.Patch(color='m', label='A')
+green = mpatches.Patch(color='green', label='A*')
 
 n_nodes = 500
 # Make Graph
 t = time.time()
 # USE IT IF WANT A PREDEFINED GRAPH
-G, points = graph.loadNodesAndMakeGraph('5000-7.npy')
+G, points = graph.loadNodesAndMakeGraph('500-3.npy')
 #G, points = graph.makeGraph(n_nodes, 3)
 print("makeGraph time taken: " + "{:.6f}".format(time.time()-t))
 
-origin = 1978
-target = 4043
+origin = 136
+target = 318
 
 # origin = np.random.randint(n_nodes)
 # target = np.random.randint(n_nodes)
@@ -40,7 +45,7 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
-anime(way, 'red')
+#anime(way, 'red')
 
 # Depth
 # t = time.time()
@@ -53,7 +58,8 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
-anime(way, 'blue')
+#anime(way, 'blue')
+
 
 # Best First
 # t = time.time()
@@ -66,7 +72,7 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
-plot.plotPath(axis, way, points, 'darkorange', 5)
+# plot.plotPath(axis, way, points, 'darkorange', 3)
 
 # A Search
 # t = time.time()
@@ -79,7 +85,7 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
-plot.plotPath(axis, way, points, 'm', 2)
+# plot.plotPath(axis, way, points, 'm', 2)
 
 # A* Search
 # t = time.time()
@@ -93,12 +99,5 @@ else :
 	print("The way is " + str(way))
 
 anime(way, 'green')
-
-red = mpatches.Patch(color='red', label='Largura')
-blue = mpatches.Patch(color='blue', label='Profundidade')
-orange = mpatches.Patch(color='darkorange', label='Best First')
-violet = mpatches.Patch(color='m', label='A')
-green = mpatches.Patch(color='green', label='A*')
-plot.legends([red, blue, orange, violet, green])
-
+plot.legends([green])
 plot.Show()
