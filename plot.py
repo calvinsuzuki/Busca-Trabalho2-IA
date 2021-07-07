@@ -194,8 +194,6 @@ def plotDistResults(tests_mtx, dist_mtx_mean, dist_mtx_std, labels):
     
     figT.tight_layout(pad=3.0)
     
-    print("Making a {},{} graphic.".format(nrows, ncols))
-    
     x = np.arange(nmethods)/2
     
     ntest = 0
