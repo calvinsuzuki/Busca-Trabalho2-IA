@@ -34,8 +34,6 @@ t_mtx_stat = []
 
 len_mtx_stat = []
 
-labels = ['Breadth', 'Depth', 'Best First', 'A', 'A*']
-
 for i in range(len(tests)):
 
     n_nodes = tests[i][0]
@@ -73,7 +71,6 @@ for i in range(len(tests)):
 
         os.system("clear")
         print("Teste: " + str(i) + ": " + str(j*100/iter_times) + "%")
-
 
         # -----Breadth-----
         t = time.time()
@@ -117,24 +114,16 @@ for i in range(len(tests)):
     
     # Time array for each method that agroups all tests cases    
     t_breadth_stat = np.array([np.mean(t_breadth_aux), np.var(t_breadth_aux), np.std(t_breadth_aux)])
-    
     t_depth_stat = np.array([np.mean(t_depth_aux), np.var(t_depth_aux), np.std(t_depth_aux)])
-    
     t_bestf_stat =  np.array([np.mean(t_bestf_aux), np.var(t_bestf_aux), np.std(t_bestf_aux)])
-    
     t_A_stat =  np.array([np.mean(t_A_aux), np.var(t_A_aux), np.std(t_A_aux)])
-    
     t_Astar_stat =  np.array([np.mean(t_Astar_aux), np.var(t_Astar_aux), np.std(t_Astar_aux)])
     
     # Len array for each method that agroups all tests cases
     len_breadth_stat = np.array([np.mean(len_breadth_aux), np.var(len_breadth_aux), np.std(len_breadth_aux)])
-    
     len_depth_stat = np.array([np.mean(len_depth_aux), np.var(len_depth_aux), np.std(len_depth_aux)])
-    
     len_bestf_stat =  np.array([np.mean(len_bestf_aux), np.var(len_bestf_aux), np.std(len_bestf_aux)])
-    
     len_A_stat =  np.array([np.mean(len_A_aux), np.var(len_A_aux), np.std(len_A_aux)])
-    
     len_Astar_stat =  np.array([np.mean(len_Astar_aux), np.var(len_Astar_aux), np.std(len_Astar_aux)])
     
     
@@ -155,6 +144,8 @@ len_mtx_stat = np.array(len_mtx_stat)
 print(np.array(t_mtx_stat))
 
 print(np.array(len_mtx_stat))
+
+labels = ['Largura', 'Profundidade', 'Best First', 'A', 'A*']
 
 plot.plotTimeResults(tests_mtx, t_mtx_stat[:,:,0], t_mtx_stat[:,:,2], labels)
 plot.plotLenResults(tests_mtx, len_mtx_stat[:,:,0], len_mtx_stat[:,:,2], labels)

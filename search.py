@@ -1,27 +1,33 @@
 from networkx.algorithms.operators.product import tensor_product
 from networkx.classes.function import non_edges
+import matplotlib.patches as mpatches
 import graph_maker as graph
 import plot
 import graph_search as gs
 import time
 import numpy as np
 
-n_nodes = 10000
+
+def anime(way, color):
+	plot.plotPath(axis, way, points, color)
+
+n_nodes = 500
 # Make Graph
 t = time.time()
 # USE IT IF WANT A PREDEFINED GRAPH
-G, points = graph.loadNodesAndMakeGraph('10000-3.npy')
+G, points = graph.loadNodesAndMakeGraph('5000-7.npy')
 #G, points = graph.makeGraph(n_nodes, 3)
 print("makeGraph time taken: " + "{:.6f}".format(time.time()-t))
 
-# origin = 45
-# target = 83
+origin = 1978
+target = 4043
 
-origin = np.random.randint(n_nodes)
-target = np.random.randint(n_nodes)
+# origin = np.random.randint(n_nodes)
+# target = np.random.randint(n_nodes)
 
 print("\nOrigin: " + str(origin) + " Target: " + str(target))
 
+figure, axis = plot.plotXY(G, points)
 
 # Breadth
 t = time.time()
@@ -34,6 +40,8 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
+anime(way, 'red')
+
 # Depth
 # t = time.time()
 way = gs.Depth(G, origin, target)
@@ -45,6 +53,7 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
+anime(way, 'blue')
 
 # Best First
 # t = time.time()
@@ -57,6 +66,7 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
+plot.plotPath(axis, way, points, 'darkorange', 5)
 
 # A Search
 # t = time.time()
@@ -69,6 +79,7 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
+plot.plotPath(axis, way, points, 'm', 2)
 
 # A* Search
 # t = time.time()
@@ -81,5 +92,13 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
+anime(way, 'green')
 
-# plot.plotXY(G, points)
+red = mpatches.Patch(color='red', label='Largura')
+blue = mpatches.Patch(color='blue', label='Profundidade')
+orange = mpatches.Patch(color='darkorange', label='Best First')
+violet = mpatches.Patch(color='m', label='A')
+green = mpatches.Patch(color='green', label='A*')
+plot.legends([red, blue, orange, violet, green])
+
+plot.Show()
