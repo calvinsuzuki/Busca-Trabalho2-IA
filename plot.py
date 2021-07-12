@@ -78,7 +78,7 @@ def plotTimeResults(tests_mtx, time_mtx_mean, time_mtx_std, labels):
     plt.rcParams.update({'font.size': 7})
     
     if ncols != 1:
-        figT, axs = plt.subplots(nrows, ncols, constrained_layout = True)
+        figT, axs = plt.subplots(nrows, ncols)
     else:
         figT, axs = plt.subplots(nrows)
     
@@ -134,7 +134,7 @@ def plotLenResults(tests_mtx, len_mtx_mean, len_mtx_std, labels):
     plt.rcParams.update({'font.size': 7})
     
     if ncols != 1:
-        figL, axs = plt.subplots(nrows, ncols, constrained_layout = True)
+        figL, axs = plt.subplots(nrows, ncols)
     else:
         figL, axs = plt.subplots(nrows)
     
@@ -188,7 +188,7 @@ def plotDistResults(tests_mtx, dist_mtx_mean, dist_mtx_std, labels):
     plt.rcParams.update({'font.size': 7})
     
     if ncols != 1:
-        figT, axs = plt.subplots(nrows, ncols, constrained_layout = True)
+        figT, axs = plt.subplots(nrows, ncols)
     else:
         figT, axs = plt.subplots(nrows)
     
@@ -260,7 +260,7 @@ def showMemoryUsage(memory_usage):
         ax.plot(memory_usage[:,i]/1000, '-o', color = colors[i], label = labels[i])
     
     ax2 = ax.twinx()
-    ax2.plot(memory_usage[:,1]/1000, marker=9, color='blue', linestyle = '--', label = 'Profundidade')
+    ax2.plot(memory_usage[:,1]/1024, marker=9, color='blue', linestyle = '--', label = 'Profundidade')
     ax2.set_yscale('log', base=10)
     ax2.tick_params(axis='y')
     ax2.set_ylabel('Alocação máxima em log. (kB) ')

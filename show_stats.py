@@ -47,7 +47,7 @@ def plotDist():
     plot.plotDistResults(tests_mtx, dist_full[:,:,0], dist_full[:,:,2], labels)
     plot.Show()
 
-print("Type 'q' to move to next plot!")
+print("Hello! Please type 'q' to move to next plot!")
 plotTime()
 plotDist()
 plotLen()

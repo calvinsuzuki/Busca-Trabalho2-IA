@@ -21,7 +21,16 @@ tests_mtx = [[(500, 3), (500,5), (500, 7)],
 
 tests = [item for sublist in tests_mtx for item in sublist ]
 
-iter_times = 1
+# Simple user interface
+while True:
+    iter_times_str = input('Welcome to distance comparison! \nHow many iteration for each graph do you want? \nWe recommend 1 for test and 10 for simple analysis. \nWe made it for 100 iterations (1 hours long)...\nIterations: ')
+    if iter_times_str.isnumeric():
+        iter_times = int(iter_times_str)
+        break
+    else:
+        print("\n\n Only integers are acept")
+
+print(f"Ok. Runing {iter_times} iterations!")
 
 dist_mtx = []
 
@@ -80,8 +89,6 @@ for i in range(len(tests)):
 
 dist_mtx = np.array(dist_mtx)
 
-print(dist_mtx)
-
 # num = 1
 # file = 'dist-25' + str(num) + '.npy'
 # with open(file, 'wb') as f:
@@ -89,6 +96,7 @@ print(dist_mtx)
 
 labels = ['Largura', 'Profundidade', 'Best First', 'A', 'A*']
 
+print("Complete. Showing results!")
 plot.plotDistResults(tests_mtx, dist_mtx[:,:,0], dist_mtx[:,:,2], labels)
 plot.Show()
 

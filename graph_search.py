@@ -107,9 +107,13 @@ def __BlindSearch(graph, origin, target, mode, DBG = False):
 			# Insere vizinhos filtrados na lista de procura
 			for element in neighbors :
 				# Caminho
-				way = []
-				way.extend(aux_str)
+				way = aux_str.copy()
+				# way.extend(aux_str)
 				way.append(element)
+
+				# print(f'Tamanho do way: {len(way)}')
+				# print(f'Tamanho do way_str: {len(aux_str)}')
+
 				# No começo da lista
 				if mode == "Depth" :
 					src_way.insert(0, way )	
@@ -118,6 +122,8 @@ def __BlindSearch(graph, origin, target, mode, DBG = False):
 				if mode == "Breadth" :
 					src_way.append( way )	
 					search.append( element )
+
+				way = []
 
 			# Se a lista de procura for vazia, caminho não encontrado!
 			if len(search) == 0 :

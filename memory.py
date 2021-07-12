@@ -2,11 +2,15 @@ import graph_maker as gm
 import graph_search as gs
 import plot
 import numpy as np
+import os
 
 import tracemalloc
 
 tests = [[100, 3], [100, 5], [100, 7], [500, 3], [500, 5], [500, 7], [5000, 3], [5000, 5], [5000, 7], [10000, 3], [10000, 5], [10000, 7]]
 critical_points = [[45, 83], [34, 63], [15, 24], [136, 318], [285, 98], [28, 133], [553, 1780], [179, 1722], [1978, 4043], [5157, 6698], [2106, 417], [377, 2880]]
+
+# tests = [[10000,7]]
+# critical_points = [[377, 2880]]
 
 memory_usage = []
 
@@ -78,12 +82,14 @@ for i in range(len(tests)):
     print(f"Astar: Size: {size}, Peak: {peak_Astar}")
 
     memory_usage.append([peak_Breadth, peak_Depth, peak_Bestf, peak_A, peak_Astar])
-    
-with open("memory-data.npy", 'wb') as f:
-    np.save(f, memory_usage)
 
+## Save memory usage
+# with open("memory-data.npy", 'wb') as f:
+#     np.save(f, memory_usage)
 
+print("Complete. Showing results!")
 plot.showMemoryUsage(memory_usage)
+plot.Show()
         
     # snapshot = tracemalloc.take_snapshot()
     # filtr = tracemalloc.DomainFilter(inclusive=False, domain=0)

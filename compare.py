@@ -26,7 +26,15 @@ tests_mtx = [[(500, 3), (500,5), (500, 7)],
 
 tests = [item for sublist in tests_mtx for item in sublist ]
 
-iter_times = 50
+while True:
+    iter_times_str = input('Welcome to time and edges comparison! \nHow many iteration for each graph do you want? \nWe recommend 1 for test and 10 for simple analysis. \nWe made it for 100 iterations (3 hours long)...\nIterations: ')
+    if iter_times_str.isnumeric():
+        iter_times = int(iter_times_str)
+        break
+    else:
+        print("\n\n Only integers are acept")
+
+print(f"Ok. Runing {iter_times} iterations!")
 
 graph_time = []
 
@@ -147,6 +155,7 @@ print(np.array(len_mtx_stat))
 
 labels = ['Largura', 'Profundidade', 'Best First', 'A', 'A*']
 
+print("Complete. Showing results!")
 plot.plotTimeResults(tests_mtx, t_mtx_stat[:,:,0], t_mtx_stat[:,:,2], labels)
 plot.plotLenResults(tests_mtx, len_mtx_stat[:,:,0], len_mtx_stat[:,:,2], labels)
 plot.Show()

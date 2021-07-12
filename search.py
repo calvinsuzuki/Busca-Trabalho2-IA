@@ -8,27 +8,30 @@ import time
 import numpy as np
 import os
 
-# Simplifica a chamada para animação
 def drawWay(way, color, animate):
 	plot.plotPath(axis, way, points, animate, color)
 
-# Define os Patches na legenda do gráfico
-red = mpatches.Patch(color='red', label='Largura')
-blue = mpatches.Patch(color='blue', label='Profundidade')
-orange = mpatches.Patch(color='darkorange', label='Best First')
-violet = mpatches.Patch(color='m', label='A')
-green = mpatches.Patch(color='green', label='A*')
-
+# ----------------------------------User interaction
+# Define nodes and edges -  LOOK AT 'graphs' FOLDER
 n_nodes = 500
-# Make Graph
-t = time.time()
-# USE IT IF WANT A PREDEFINED GRAPH
-G, points = graph.loadNodesAndMakeGraph(os.path.join('graphs','500-3.npy'))
-#G, points = graph.makeGraph(n_nodes, 3)
-print("makeGraph time taken: " + "{:.6f}".format(time.time()-t))
+n_edges = 3
 
+# Define origin and target - MAKE SURE THEY ARE IN THE GRAPH 
 origin = 136
 target = 318
+# ----------------------------------
+
+# Make Graph
+t = time.time()
+
+# USE IT IF WANT A PREDEFINED GRAPH. 
+file = os.path.join('graphs',f'{n_nodes}-{n_edges}.npy')
+G, points = graph.loadNodesAndMakeGraph(file)
+
+# USE IT IF WANT TO GENERATE A GRAPH
+#G, points = graph.makeGraph(n_nodes, 3)
+
+print("Graph load or make time taken: " + "{:.6f}".format(time.time()-t))
 
 # origin = np.random.randint(n_nodes)
 # target = np.random.randint(n_nodes)
@@ -101,6 +104,15 @@ if way == [-1] :
 else :
 	print("The way is " + str(way))
 
+# Define os Patches na legenda do gráfico
+red = mpatches.Patch(color='red', label='Largura')
+blue = mpatches.Patch(color='blue', label='Profundidade')
+orange = mpatches.Patch(color='darkorange', label='Best First')
+violet = mpatches.Patch(color='m', label='A')
+green = mpatches.Patch(color='green', label='A*')
+
 drawWay(way, 'green', False)
 plot.legends([red, blue, orange, violet, green])
+
+print("Complete. Showing results!")
 plot.Show()
