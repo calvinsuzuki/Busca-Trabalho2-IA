@@ -1,5 +1,7 @@
 # Busca-Trabalho2-IA
 
+![alt text](figures/AllGraphs.png)
+
 # Installation
 ```
 pip install networkx
